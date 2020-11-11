@@ -1,3 +1,4 @@
+% Creates the VideoWriter object
 function [writeObj]=videoExporter()
     count = 0;
     err_count = 0;

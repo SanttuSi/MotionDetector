@@ -1,4 +1,4 @@
-% a function to process the video and draw a red box around the movement
+% function to detect motion and draw a red box around the movement
 % TODO:
 %   -optimization
 %   -adding options (such as what kind of video to export)
