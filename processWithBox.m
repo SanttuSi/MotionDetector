@@ -12,10 +12,11 @@ function [ motionFrames ] = processWithBox(video,writeObj)
     % variables of the video format
     width=video.Width; 
     height=video.Height;
+    framesLen=video.NumFrames;
+    motionFrames=zeros(1,framesLen); % initialize the return vector
     frameCount=1;
-    motionFrames=[];
     %loop trough each frame
-    while hasFrame(video)
+    for frameIndex =2:framesLen
         frame = readFrame(video); %read the next frame
         modifiedFrame=frame;% make a copy of the frame to mofidy
         grayFrame= rgb2gray(frame); % convert frame to grayscale
@@ -26,31 +27,29 @@ function [ motionFrames ] = processWithBox(video,writeObj)
         highest=height+1;
         rightmost=0;
         leftmost=width+1;
-        
-        found=0;
-        % loop trough every pixel in the difference frame
-        if ~isempty(diff(diff>70))
-            for i=1:height
-                wasFound=0;
-                for j = 1:width
-                    if diff(i,j)>70 % mark up the value where the differnce is larger than 70
-                        wasFound=1;
-                        found=1;
-                        leftmost=min(leftmost,j);
-                        rightmost=max(rightmost,j);
-                        
-                    end
-                end
-                if wasFound % mark up the value where the differnce is larger than 70
-                    highest=min(highest,i);
-                    lowest=max(lowest,i);
+        found=0; 
+        % loop trough every pixel in the difference frame 
+        for i=1:height
+            wasFound=0;
+            for j = 1:width
+                if diff(i,j)>70 % mark up the value where the differnce is larger than 70
+                    wasFound=1;
+                    found=1;
+                    leftmost=min(leftmost,j);
+                    rightmost=max(rightmost,j);
                 end
             end
+            if wasFound % mark up the value where the differnce is larger than 70
+                highest=min(highest,i);
+                lowest=max(lowest,i);
+            end
         end
+
         
         % draw the lines
         if found
-            motionFrames=[motionFrames frameCount];
+            motionFrames(frameCount)=frameIndex;
+            frameCount=frameCount+1;
             vertical=leftmost:rightmost;
             modifiedFrame(highest,vertical,1)=255;
             modifiedFrame(highest,vertical,2:3)=0;
@@ -69,9 +68,8 @@ function [ motionFrames ] = processWithBox(video,writeObj)
         writeVideo(vid,modifiedFrame);
         % save last frame
         lastFrame=grayFrame;
-        frameCount= frameCount+1;
-        
     end
+    motionFrames=motionFrames(motionFrames>0); % filter the zeros
     disp("processing completed.")
     
 end
