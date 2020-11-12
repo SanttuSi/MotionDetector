@@ -21,10 +21,6 @@ function [ motionFrames ] = processVideo(video)
             motionFrames=processWithOutlines(video,videoExporter());
         elseif arg == 4
             motionFrames=processWithGetMovement(video);
-            fprintf('\n');
-            disp("Frames with motion:")
-            disp("(start frame, end frame)")
-            disp(motionFrames)
         else
             disp("Command not recognized. Please try again.")
             err_count = err_count + 1;
