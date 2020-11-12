@@ -5,10 +5,12 @@ function [ motionFrames ] = processWithOutlines(video,writeObj)
     open(vid); % open the file 
     width=video.Width; 
     height=video.Height;
+    
+    framesLen=video.NumFrames;
+    motionFrames=zeros(1,framesLen); % initialize the return vector
     frameCount=1;
-    motionFrames=[];
    
-    while hasFrame(video)
+    for frameIndex=2:framesLen
         frame = readFrame(video); %read the next frame
         grayFrame= rgb2gray(frame); % convert frame to grayscale
         modifiedFrame=frame;% make a copy of the frame to mofidy
@@ -16,28 +18,28 @@ function [ motionFrames ] = processWithOutlines(video,writeObj)
         movementOutlines=modifiedFrame+diff; % joins together movement and frame difference
         
         found = 0;
-        if ~isempty(diff(diff>70))
-            for i=1:height
-                for j = 1:width
-                    if diff(i,j)>70 % mark up the value where the differnce is larger than 70
-                        found=1;
-                    end
+        
+        for i=1:height
+            for j = 1:width
+                if diff(i,j)>70 % mark up the value where the differnce is larger than 70
+                    found=1;
                 end
             end
         end
         
+        
         if found
-            motionFrames=[motionFrames frameCount];
+            motionFrames(frameCount)=frameIndex;
+            frameCount= frameCount+1;
         end
         
         % write the frame to the file
         writeVideo(vid,movementOutlines);
         % save last frame
         lastFrame=grayFrame;
-        frameCount= frameCount+1;
         
     end
- 
+    motionFrames=motionFrames(1:frameCount);
     disp("processing completed.")
     close(vid)
 end

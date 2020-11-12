@@ -69,7 +69,7 @@ function [ motionFrames ] = processWithBox(video,writeObj)
         % save last frame
         lastFrame=grayFrame;
     end
-    motionFrames=motionFrames(motionFrames>0); % filter the zeros
+    motionFrames=motionFrames(1:frameCount); % filter the zeros
     disp("processing completed.")
     
 end
