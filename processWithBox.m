@@ -73,5 +73,6 @@ function [ motionFrames ] = processWithBox(video,writeObj)
         
     end
     disp("processing completed.")
+    close(vid)
     
 end
