@@ -4,39 +4,27 @@ function [ motionFrames ] = processWithMachineVision(video,writeObj)
     disp("Starting processing...")
     lastFrame=rgb2gray(readFrame(video)); % read the first frame and convert it to grayscale
     vid=writeObj;
-    open(vid); % open the file 
-    width=video.Width; 
-    height=video.Height;
-    frameCount=1;
-    motionFrames=[];
-   
-    while hasFrame(video)
+    open(vid); % open the file
+    framesLen=video.NumFrames;
+    motionFrames=zeros(1,framesLen);
+    motionFrameCounter=1;
+    
+    for i=2:framesLen
         frame = readFrame(video); %read the next frame
         grayFrame= rgb2gray(frame); % convert frame to grayscale
         diff=grayFrame-lastFrame; % calculate the difference of the frames
+        diff(diff<90)=0;
         % write the frame to the file
         writeVideo(vid,diff);
         % save last frame
         lastFrame=grayFrame;
-        frameCount= frameCount+1;
-        
-        found = 0;
-        if ~isempty(diff(diff>70))
-            for i=1:height
-                for j = 1:width
-                    if diff(i,j)>70 % mark up the value where the differnce is larger than 70
-                        found=1;
-                    end
-                end
-            end
-        end
-        
-        if found
-            motionFrames=[motionFrames frameCount];
+        if ~isempty(diff(diff>1))
+            motionFrames(motionFrameCounter)=i;
+            motionFrameCounter=motionFrameCounter+1;
         end
         
     end
- 
+    motionFrames= motionFrames(1:motionFrameCounter);
     disp("processing completed.")
     close(vid)
 end
