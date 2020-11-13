@@ -2,6 +2,7 @@
 % specifies
 function [ motionFrames ] = processVideo(video)
 
+
     %disp("Please input the option you want to use for processing the video.")
     %disp("commands:")
     %disp("boxed")
@@ -27,6 +28,5 @@ function [ motionFrames ] = processVideo(video)
         end
         count= count+1;
     end
-    
-    
 end
+
