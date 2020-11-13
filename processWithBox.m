@@ -12,6 +12,7 @@ function [ motionFrames ] = processWithBox(video,writeObj)
     % variables of the video format
     width=video.Width; 
     height=video.Height;
+
     framesLen=video.NumFrames;
     motionFrames=zeros(1,framesLen); % initialize the return vector
     frameCount=1;
@@ -27,6 +28,7 @@ function [ motionFrames ] = processWithBox(video,writeObj)
         highest=height+1;
         rightmost=0;
         leftmost=width+1;
+
         found=0; 
         % loop trough every pixel in the difference frame 
         for i=1:height
@@ -71,5 +73,5 @@ function [ motionFrames ] = processWithBox(video,writeObj)
     end
     motionFrames=motionFrames(1:frameCount); % filter the zeros
     disp("processing completed.")
-    
+    close(vid)    
 end
