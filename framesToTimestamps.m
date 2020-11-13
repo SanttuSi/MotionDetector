@@ -3,6 +3,7 @@
 function [ timeStamps ] = framesToTimestamps(motionFrames, video)
     %disp("Converting frames to timestamps...")
     
+    % Varibles for converting framestamps to timestamps
     frameRate = video.FrameRate;
     motionMatrix = [];
     i = 1;
@@ -11,6 +12,8 @@ function [ timeStamps ] = framesToTimestamps(motionFrames, video)
     timeStamps = [];
     frameSpace = 1;
     
+    % Converting vector of motion frames to Nx2 matrix with start frame on
+    % the first column and end frame on the second
     for n = 1:length(motionFrames)
         currentFrame = motionFrames(n);
         if n ~= 1
@@ -32,7 +35,7 @@ function [ timeStamps ] = framesToTimestamps(motionFrames, video)
     end
     
     % Delete all the motion frame spaces that are less than 3 frames long
-    % to prevent noise induced motion stamps
+    % to prevent noise induced timestamps
     deleteSpots = zeros(size(motionMatrix,1),1);
     spot = 1;
     for n = 1:size(motionMatrix,1)
@@ -58,6 +61,8 @@ function [ timeStamps ] = framesToTimestamps(motionFrames, video)
         i = i+1;
         j = j+1;
     end
+    
+    % Printing the resulting timestamps
     fprintf('\n');
     disp("Time spaces with motion")
     disp("In seconds:")
