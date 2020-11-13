@@ -31,5 +31,6 @@ function [ motionFrames ] = processWithGetMovement(video)
         lastFrame=grayFrame;
     end
     motionFrames = motionFrames(1:motionFrameCounter);
+    
     disp("processing completed.")
 end
