@@ -15,7 +15,9 @@ function [ motionFrames ] = processVideo(video)
         if arg=="boxed"
             motionFrames=processWithBox(video, videoExporter());
         elseif arg== "machine vision"
-            % processWithMachineVision(video,videoExporter());
+            motionFrames=processWithMachineVision(video,videoExporter());
+        elseif arg=="outlines"
+            motionFrames=processWithOutlines(video,videoExporter());
         else
             disp("Command not recognized. Please try again.")
             err_count = err_count + 1;
