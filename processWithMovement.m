@@ -1,4 +1,4 @@
-function [ motionFrames ] = processWithMovement(video,timeStamps, writeObj, motionFrames)
+function [  ] = processWithMovement(video,timeStamps, writeObj)
     disp("Starting processing...")
     vid=writeObj;
     open(vid); % open the file
