@@ -5,6 +5,7 @@ function [ motionFrames ] = processWithMovement(video,timeStamps, writeObj, moti
     FPS = video.FrameRate;
     frameMatrix = size(timeStamps);
     
+    % Transform time matrix into frame matrix
     i = 1;
     j = 1;
     for m = 1:size(timeStamps,1)
@@ -16,6 +17,8 @@ function [ motionFrames ] = processWithMovement(video,timeStamps, writeObj, moti
         j = j+1;
     end
 
+    % Use frame matrix datapoints to create trimmed video with only the
+    % movement clips
     for n = 1:size(frameMatrix,1)
         for frameIndex = frameMatrix(n,1):frameMatrix(n,2)
             frame = read(video,frameIndex); %read the next frame
