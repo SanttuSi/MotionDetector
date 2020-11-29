@@ -4,7 +4,7 @@
 %   -optimization
 
 function [ motionFrames ] = processWithGetMovement(video)
-    %disp("Starting processing...")
+    disp("Processing...")
     lastFrame = rgb2gray(readFrame(video)); % read the first frame and convert it to grayscale
     
     % variables of the video format
