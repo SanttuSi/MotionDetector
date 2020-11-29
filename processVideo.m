@@ -25,7 +25,7 @@ function [ motionFrames ] = processVideo(video)
         elseif arg == 5
             motionFrames=processWithGetMovement(video);
             timeStamps=framesToTimestamps(motionFrames, video);
-            motionFrames=processWithMovement(video, timeStamps, videoExporter(),motionFrames);
+            processWithMovement(video, timeStamps, videoExporter());
         else
             disp("Command not recognized. Please try again.")
             err_count = err_count + 1;
