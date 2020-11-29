@@ -1,5 +1,5 @@
 function [  ] = processWithMovement(video,timeStamps, writeObj)
-    disp("Starting processing...")
+    disp("Processing...")
     vid=writeObj;
     open(vid); % open the file
     FPS = video.FrameRate;
