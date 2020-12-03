@@ -11,8 +11,8 @@ function [  ] = processWithMovement(video,timeStamps, writeObj)
     for m = 1:size(timeStamps,1)
         startFrame = timeStamps(m,1) * FPS;
         endFrame = timeStamps(m,2) * FPS;
-        frameMatrix(i,1) = floor(startFrame);
-        frameMatrix(j,2) = ceil(endFrame);
+        frameMatrix(i,1) = ceil(startFrame);
+        frameMatrix(j,2) = floor(endFrame);
         i = i+1;
         j = j+1;
     end
@@ -21,9 +21,11 @@ function [  ] = processWithMovement(video,timeStamps, writeObj)
     % movement clips
     for n = 1:size(frameMatrix,1)
         for frameIndex = frameMatrix(n,1):frameMatrix(n,2)
-            frame = read(video,frameIndex); %read the next frame
-            % write the frame to the file
-            writeVideo(vid,frame);
+            if frameIndex < video.NumFrames && frameIndex > 0 
+                frame = read(video,frameIndex); %read the next frame
+                % write the frame to the file
+                writeVideo(vid,frame);
+            end
         end
     end
     disp("processing completed.")
