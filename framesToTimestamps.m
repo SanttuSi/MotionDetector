@@ -61,14 +61,6 @@ function [ timeStamps ] = framesToTimestamps(motionFrames, video)
         i = i+1;
         j = j+1;
     end
-    
-    % Printing the resulting timestamps
-    fprintf('\n');
-    disp("Time spaces with motion")
-    disp("In seconds:")
-    disp("------------------------")
-    disp("(start time, end time)")
-    disp(timeStamps)
-    
+
 end
             
