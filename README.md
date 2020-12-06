@@ -4,7 +4,7 @@
 ## About The Project
 
 
-This project was done during the the course "Sovellettu Digitaalinen Signaalinkäsittely" which is teached in Aalto University. The main focus of this project was to create an application that can detect motion from still video. This could be used for processing surveillance footage. More information about the project can be found from this document.
+This project was done during the the course "Sovellettu Digitaalinen Signaalinkäsittely" which is teached in Aalto University. The main focus of this project was to create an application that can detect motion from still video. This could be used for processing surveillance footage. More information about the project can be found from this [document](https://drive.google.com/file/d/1FhbXunCz3z4Eqr9JWS4P_M4tB1UuY4kX/view?usp=sharing).
 
 ### Built With
 
