@@ -1,11 +1,11 @@
 %% test with a file specified in path
-path='ExampleVideos\testVideo1.mp4';
+path='horizontal60fps.mp4';
 video=VideoReader(path);
 
 %test times
 disp("testing movement"+newline)
 movementTime=tic;
-processWithGetMovement(video);
+frames=processWithGetMovement(video);
 movementEnd=toc(movementTime);
 
 disp("testing machine vision" +newline)
@@ -29,6 +29,14 @@ OutTime=tic;
 processWithOutlines(video,OutObj);
 OutEnd=toc(OutTime);
 
+disp ("testing cutting movement" + newline);
+video=VideoReader(path);
+cutObj=VideoWriter('Cut','MPEG-4');
+cutTime=tic;
+stamps=framesToTimestamps(frames,video);
+processWithMovement(video,stamps,cutObj);
+cutEnd=toc(cutTime);
+
 disp("times:")
 disp('movement:' )
 disp(movementEnd)
@@ -38,8 +46,5 @@ disp('boxed:' )
 disp(BoxEnd)
 disp('outlined:' )
 disp(OutEnd)
-
-
-
-
-%% test with large file (slower)
+disp('cutting video to movement parts:')
+disp(cutEnd)
