@@ -61,8 +61,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Creators
 
  Santeri Sipilä - santeri.sipila@aalto.fi  
- Daniel Nikkari  - daniel.nikkari@aalto.fi
- Frans Welin  
+ Daniel Nikkari  - daniel.nikkari@aalto.fi  
+ Frans Welin  - frans.welin@aalto.fi
 
 
 
